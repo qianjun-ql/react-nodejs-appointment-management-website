@@ -48,7 +48,7 @@ const Profile = ({user}) => {
         method:'put',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${localStorage.getItem('token')}`
         },
         body: JSON.stringify(formData)
       });
@@ -59,7 +59,14 @@ const Profile = ({user}) => {
       };
       setLoading(false);
       toast.success(message);
-      navigate('/users/profile/me');
+      
+      setTimeout(() => {
+        window.location.reload();
+    }, 1000);
+
+      const updatedUser = { ...JSON.parse(localStorage.getItem('user')), photo: formData.photo };
+      localStorage.setItem('user', JSON.stringify(updatedUser));
+
     } catch (err) {
       toast.error(err.message);
       setLoading(false);

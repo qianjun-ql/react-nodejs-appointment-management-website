@@ -5,6 +5,7 @@ import uploadImageToCloudinary from './../../utils/uploadCloudinary';
 import {BASE_URL, token} from './../../config';
 import { toast } from 'react-toastify';
 
+
 const Profile = ({doctorData}) => {
 
     const [formData, setFormData] = useState({
@@ -51,15 +52,15 @@ const Profile = ({doctorData}) => {
         setFormData({ ...formData, photo: data?.url})
 
     };
-    
-    const updateProfileHandler = async e => {
+
+    const updateProfileHandler = async (e) => {
         e.preventDefault();
         try {
             const res = await fetch(`${BASE_URL}/doctors/${doctorData._id}`, {
                 method: 'PUT',
                 headers: {
                     'content-type': 'application/json',
-                    Authorization: `Bearer ${token}`
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
                 },
                 body: JSON.stringify(formData)
             });
@@ -67,10 +68,25 @@ const Profile = ({doctorData}) => {
             if (!res.ok) {
                 throw new Error(result.message);
             }
-            toast.success(result.message);
+    
+            // Update profile photo in localStorage
+            const updatedUser = { ...JSON.parse(localStorage.getItem('user')), photo: formData.photo };
+            localStorage.setItem('user', JSON.stringify(updatedUser));
+    
+            // Show success toast
+            toast.success(result.message, {
+                position: "bottom-right"
+            });
+    
+            // Force page refresh after a short delay
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
     
         } catch (err) {
-            toast.error(err.message);
+            toast.error(err.message, {
+                position: "bottom-right",
+            });
         }
     };
 

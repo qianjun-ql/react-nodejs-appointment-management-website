@@ -29,7 +29,7 @@ export const getCheckoutSession = async ( req, res ) => {
                         images: [doctor.photo]
                     }
                 },
-                quantity: 1
+                quantity: 100
             }
         ]
         })
@@ -41,11 +41,9 @@ export const getCheckoutSession = async ( req, res ) => {
             ticketPrice: doctor.ticketPrice,
             session: session.id,
         })
-
         await booking.save();
         res.status(200).json({ success: true, message: 'Paid Success', session});
     } catch (err) {
-        console.log(err);
         res.status(500).json({ success: false, message: 'Error checking out' });
     }
 }

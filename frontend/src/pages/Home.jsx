@@ -32,7 +32,12 @@ const Home = () => {
             <h1 className='text-[56px] leading-[46px] text-headingColor font-[800] md:text[60px] md:leading-[70px]'>
               We help patients live a healthy, longer life.</h1>
             <p className='text__para'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minus fuga ipsam, porro magnam modi error in magni inventore, atque possimus veniam ut vero alias tempora itaque suscipit officia accusamus. Ullam?</p>
-            <button className='btn'>Request an Appointment</button>
+            <p>
+            <Link to='/doctors'>
+                  <button className='btn'>Request an Appointment</button>
+                </Link>
+            </p>
+
           </div>
             {/* ==============hero counter============== */}
             <div className='mt-[30px] lg:mt-[70px] flex flex-col lg:flex-row lg:items-center gap-5 lg:gap-[30px]'>
@@ -198,9 +203,8 @@ const Home = () => {
                       3. View our physicians who are accepting new patients, use the online scheduling tool to select an appointment time.
                     </li>
                 </ul>
-                <Link to='/'>
+                <Link to='/doctors'>
                   <button className='btn'>Learn More</button>
-                  
                 </Link>
               </div>
               {/* ===========feature img================ */}

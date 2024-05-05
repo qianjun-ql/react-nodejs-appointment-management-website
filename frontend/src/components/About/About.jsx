@@ -25,7 +25,7 @@ const About = () => {
                 For 30 years in a row, U.S. News and World Report has recognized us ason of the the best public hospitals in the Nation and #1 in Texas. Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio, distinctio ullam hic sunt.
                 </p>
 
-                <Link to='/'>
+                <Link to='/doctors'>
                     <button className='btn'>
                         Learn More
                     </button>

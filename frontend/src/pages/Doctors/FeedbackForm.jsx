@@ -27,10 +27,10 @@ const FeedbackForm = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
                 },
                 body: JSON.stringify({rating, reviewText}),
-            })
+            });
 
             const result = await res.json();
             if (!res.ok) {
@@ -38,7 +38,7 @@ const FeedbackForm = () => {
             }
             setLoading(false);
             toast.success(result.message);
-
+            window.location.reload();
         } catch (err) {
             setLoading(false);
             toast.error(err.message);
