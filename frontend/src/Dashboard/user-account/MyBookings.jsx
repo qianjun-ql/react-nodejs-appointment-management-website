@@ -11,6 +11,11 @@ const MyBookings = () => {
       error 
     } = useFetchData(`${BASE_URL}/users/appointments/my-appointments`)
 
+    // Memoize the sorted appointments
+    const sortedAppointments = useMemo(() => {
+        return [...appointments].sort((a, b) => new Date(a.date) - new Date(b.date));
+    }, [appointments]);
+
     return (
       <div>
         {loading && !error && <Loading />}
@@ -18,7 +23,7 @@ const MyBookings = () => {
   
          {!loading && !error && (<div className='grid grid-cols-1 lg:grid-cols-2 gap-5 '>
           {
-            appointments.map(doctor => (
+            sortedAppointments.map(doctor => (
             <DoctorCard doctor={doctor} key={doctor._id}/>
             ))}
       </div>
